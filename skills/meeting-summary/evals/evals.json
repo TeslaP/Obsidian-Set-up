@@ -1,0 +1,44 @@
+{
+  "skill_name": "meeting-summary",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Summarize my last meeting",
+      "expected_output": "Skill auto-finds the most recent transcript in $VAULT_PATH/Notes/Meetings/, generates a 3-section summary (TLDR, Agreements, Next steps), writes a .md file to $VAULT_PATH/Summaries/, and prints a Slack-ready block",
+      "files": [],
+      "expectations": [
+        "Output file is written to ~/notes.md/Summaries/ with the correct folder name",
+        "Summary has exactly 3 sections: TLDR, Agreements, Next steps",
+        "Each section has 3-5 bullet points (Next steps may have more)",
+        "Frontmatter includes type, tags, source, date, and week fields",
+        "A Slack-ready block is printed with bold formatting using *asterisks*",
+        "The week field is in YYYY-WNN ISO format (e.g., 2026-W29)"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Write up today's 1:1 — the transcript is at /Users/pteslenko/notes.md/Notes/Meetings/2026-07-14 14.54.45 Pasha _ Joanna 1o1/Pasha _ Joanna 1o1  transcript_2026-07-14_14.54.43.txt",
+      "expected_output": "Skill uses the explicit path, extracts meeting name and date, generates summary, writes to Summaries/ folder, prints Slack block",
+      "files": [],
+      "expectations": [
+        "Meeting name extracted correctly as 'Pasha _ Joanna 1o1' (no timestamp prefix)",
+        "Output file written to ~/notes.md/Summaries/2026-07-14 14.54.45 Pasha _ Joanna 1o1.md",
+        "Summary has exactly 3 sections: TLDR, Agreements, Next steps",
+        "Slack block starts with bold meeting name and date: *Pasha _ Joanna 1o1 — 2026-07-14*",
+        "Frontmatter date field is 2026-07-14 and week field is 2026-W29"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Meeting notes from this morning",
+      "expected_output": "Skill recognizes this as a meeting summary request, auto-finds transcript, produces all outputs identical to eval 1",
+      "files": [],
+      "expectations": [
+        "Skill triggers on casual phrasing 'meeting notes from this morning'",
+        "Output file written to ~/notes.md/Summaries/ directory",
+        "Summary has exactly 3 sections: TLDR, Agreements, Next steps",
+        "Tells user where file was saved and to copy Slack block"
+      ]
+    }
+  ]
+}
