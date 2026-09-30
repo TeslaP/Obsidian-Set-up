@@ -31,7 +31,6 @@ VAULT_PATH=~/my-vault ./bootstrap.sh
 
 * Actual notes, summaries, people, decisions (your data)
 * Meeting recordings or transcripts
-* Booking.com-managed skills (those come from `bk genai:skills:install`)
 * Claude Code auth/env settings (machine-specific)
 
 ## After bootstrap
